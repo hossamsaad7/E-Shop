@@ -9,9 +9,9 @@
               <ul>
 
                 @foreach ($categories as $category)
-                <li class="mb-4" wire:key = 'category_id'>
-                  <label for="" class="flex items-center dark:text-gray-400 ">
-                    <input type="checkbox" class="w-4 h-4 mr-2">
+                <li class="mb-4" wire:key = {{$category->id}}>
+                  <label for="{{$category->slug}}" class="flex items-center dark:text-gray-400 ">
+                    <input type="checkbox" id="{{$category->slug}}" value="{{$category->id}}" class="w-4 h-4 mr-2">
                     <span class="text-lg">{{$category->name}}</span>
                   </label>
                 </li>
@@ -25,9 +25,9 @@
               <div class="w-16 pb-2 mb-6 border-b border-rose-600 dark:border-gray-400"></div>
               <ul>
                @foreach ($brands as $brand)
-               <li class="mb-4" wire:key = 'brand_id'>
-                <label for="" class="flex items-center dark:text-gray-300">
-                  <input type="checkbox" class="w-4 h-4 mr-2">
+               <li class="mb-4" wire:key = {{$brand->id}}>
+                <label for="{{$brand->slug}}" class="flex items-center dark:text-gray-300">
+                  <input type="checkbox" id="{{$brand->slug}}" value="{{$brand->id}}" class="w-4 h-4 mr-2">
                   <span class="text-lg dark:text-gray-400">{{$brand->name}}</span>
                 </label>
               </li>
@@ -80,7 +80,7 @@
             <div class="flex flex-wrap items-center ">
   
               @foreach ($products as $product)
-              <div class="w-full px-3 mb-6 sm:w-1/2 md:w-1/3">
+              <div class="w-full px-3 mb-6 sm:w-1/2 md:w-1/3" wire:key = {{$product->id}}>
                 <div class="border border-gray-300 dark:border-gray-700">
                   <div class="relative bg-gray-200">
                     <a href="/products/{{$product->slug}}" class="">
