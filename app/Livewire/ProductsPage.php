@@ -2,6 +2,8 @@
 
 namespace App\Livewire;
 
+use App\Helpers\CartManagement;
+use App\Livewire\Partials\Navbar;
 use App\Models\Brand;
 use App\Models\Category;
 use App\Models\Product;
@@ -16,15 +18,28 @@ class ProductsPage extends Component
     use WithPagination;
 
     #[Url()]
-    public $selected_categories = [];   
+    public $selected_categories = [];  
+
     #[Url()]
     public $selected_brands = [];   
+
     #[Url()]
     public $featured;   
+
     #[Url()]
     public $on_sale;   
+
     #[Url()]
     public $price_range = 5000;   
+
+    #[Url()]
+    public $sort = 'latest';
+
+    public function addToCart($product_id){
+        $total_count = CartManagement::addItemToCart($product_id);
+
+        $this->dispatch('update-cart-count', total_count: $total_count)->to(Navbar::class);
+    }
     
     public function render()
     {
@@ -43,6 +58,14 @@ class ProductsPage extends Component
 
         if($this->on_sale){
             $productQuery->where('on_sale', 1);
+        }
+
+        if($this->sort == 'latest'){
+            $productQuery->latest();
+        }
+
+        if($this->sort == 'price'){
+            $productQuery->orderBy('price');
         }
 
         if($this->price_range){
