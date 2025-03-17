@@ -42,18 +42,18 @@
             <div class="w-32 mb-8">
               <label class="w-full pb-1 text-xl font-semibold text-gray-700 border-b border-blue-300 dark:border-gray-600 dark:text-gray-400">Quantity</label>
               <div class="relative flex flex-row w-full h-10 mt-6 bg-gray-200 rounded-lg overflow-hidden">
-                <button class="w-20 h-full text-gray-600 bg-gray-300 dark:bg-gray-900 hover:bg-gray-400 dark:hover:bg-gray-700 transition-all duration-300 ease-in-out">
+                <button wire:click='decreaseQty'  class="w-20 h-full text-gray-600 bg-gray-300 dark:bg-gray-900 hover:bg-gray-400 dark:hover:bg-gray-700 transition-all duration-300 ease-in-out">
                   -
                 </button>
-                <input type="number" readonly class="w-full text-center text-gray-700 bg-gray-300 dark:bg-gray-900 font-semibold focus:outline-none" placeholder="1">
-                <button class="w-20 h-full text-gray-600 bg-gray-300 dark:bg-gray-900 hover:bg-gray-400 dark:hover:bg-gray-700 transition-all duration-300 ease-in-out">
+                <input wire:model='quantity' type="number" readonly class="w-full text-center text-gray-700 bg-gray-300 dark:bg-gray-900 font-semibold focus:outline-none" placeholder="1">
+                <button  wire:click='increaseQty' class="w-20 h-full text-gray-600 bg-gray-300 dark:bg-gray-900 hover:bg-gray-400 dark:hover:bg-gray-700 transition-all duration-300 ease-in-out">
                   +
                 </button>
               </div>
             </div>
             <div class="flex flex-wrap items-center gap-4">
-              <button class="w-full p-4 bg-gradient-to-r from-blue-500 to-blue-600 rounded-md lg:w-2/5 text-white font-bold shadow-lg transform hover:scale-105 transition-all duration-300 ease-in-out">
-                Add to cart
+              <button wire:click.prevent='addToCart({{$product->id}})' class="w-full p-4 bg-gradient-to-r from-blue-500 to-blue-600 rounded-md lg:w-2/5 text-white font-bold shadow-lg transform hover:scale-105 transition-all duration-300 ease-in-out">
+                <span wire:loading.remove wire:target='addToCart({{$product->id}})'>Add to Cart</span><span wire:loading wire:target='addToCart({{$product->id}})'>Adding...</span>
               </button>
             </div>
           </div>

@@ -40,6 +40,7 @@ class ProductsPage extends Component
 
         $this->dispatch('update-cart-count', total_count: $total_count)->to(Navbar::class);
     }
+
     
     public function render()
     {
